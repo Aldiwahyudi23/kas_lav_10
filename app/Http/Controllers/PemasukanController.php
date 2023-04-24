@@ -322,8 +322,8 @@ class PemasukanController extends Controller
     public function data_pemasukan_admin()
     {
         $data_pemasukan = Pemasukan::all();
-        $total_pemasukan = Pemasukan::where('kategori', 'Kas')->sum('jumlah');
-        $total_pinjaman = Pengeluaran::where('anggaran_id', 3)->sum('jumlah');
+        $total_pemasukan = Pemasukan::orderByRaw('created_at DESC')->where('kategori', 'Kas')->sum('jumlah');
+        $total_pinjaman = Pengeluaran::orderByRaw('created_at DESC')->where('anggaran_id', 3)->sum('jumlah');
         $total_pengeluaran_semua = Pengeluaran::all()->sum('jumlah');
         $total_pengeluaran = $total_pengeluaran_semua - $total_pinjaman;
 
