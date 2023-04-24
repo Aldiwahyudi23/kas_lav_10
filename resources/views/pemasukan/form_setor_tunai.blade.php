@@ -34,6 +34,8 @@
                                      <img src="https://media.tenor.com/LAkobF0eiDwAAAAC/assalamu-alaikum-salam.gif" alt="" width="50%">
                                      <h5 class="text-bold card-header bg-light p-0">SETOR TUNAI</h5>
                                  </center>
+
+
                                  <div class="">
                                      <form id="basic-form" action="{{Route('pemasukan.store')}}" method="POST" enctype="multipart/form-data" novalidate>
                                          {{csrf_field()}}
@@ -41,7 +43,9 @@
                                          <div class="form-group row" id="noId"></div>
                                          <div class="form-group row">
                                              <label for="jumlah">Nominal</label>
-                                             <input type="hidden" name="anggota_id" id="anggota_id" value="{{Auth::id()}}">
+                                             <input type="hidden" name="anggota_id" id="anggota_id" value="{{Auth::user()->id}}">
+                                             <input type="hidden" name="pengaju_id" id="pengaju_id" value="{{Auth::user()->id}}">
+                                             <input type="hidden" id="tanggal" name="tanggal" value="{{$data1 }}">
                                              <input type="hidden" name="kategori" id="kategori" value="Setor_Tunai">
                                              <input type="hidden" name="pembayaran" id="pembayaran" value="Transfer">
                                              <input type="text" id="jumlah" name="jumlah" value="{{ old('jumlah') }}" placeholder="Cont : 50000    jangan pake titik ataupun koma" class="form-control col-12 @error('jumlah') is-invalid @enderror">
