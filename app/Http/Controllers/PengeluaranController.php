@@ -348,7 +348,7 @@ class PengeluaranController extends Controller
         $total_dana_kas = $kas_dibagi2; //mengambil jumlah dana darurat
 
         // data pengeluaran
-        $data_pengeluaran = Pengeluaran::all();
+        $data_pengeluaran = Pengeluaran::orderByRaw('created_at DESC')->get();
         $total_pengeluaran_kas = Pengeluaran::all()->sum('jumlah');
         $total_pengeluaran_darurat = Pengeluaran::where('anggaran_id', 1)->sum('jumlah');
         $total_pengeluaran_amal = Pengeluaran::where('anggaran_id', 2)->sum('jumlah');
