@@ -57,7 +57,10 @@ class HomeController extends Controller
         $total_pengeluaran_lain = Pengeluaran::where('anggaran_id', 6)->sum('jumlah');
         $total_pengeluaran_tarik_pinjaman = Pengeluaran::where('anggaran_id', 7)->sum('jumlah');
 
-        $total_pengeluaran_kas = $total_pengeluaran_darurat + $total_pengeluaran_amal +  $total_pengeluaran_pinjaman + $total_pengeluaran_usaha + $total_pengeluaran_acara + $total_pengeluaran_lain;
+
+
+        $total_pengeluaran_kas = $total_pengeluaran_darurat + $total_pengeluaran_amal  + $total_pengeluaran_usaha + $total_pengeluaran_acara + $total_pengeluaran_lain;
+        $total_pengeluaran_kas_3 = $total_pengeluaran_lain + $total_pengeluaran_usaha + $total_pengeluaran_acara;
 
         // Perhitungan uang yang masuk lewat Transfer
         $total_pembayaran_tf = Pemasukan::where('pembayaran', 'Transfer')->sum('jumlah');
@@ -68,11 +71,11 @@ class HomeController extends Controller
 
         // Perhitungan saldo kas
         $saldo_kas = $total_pemasukan_kas - $total_pengeluaran_kas;
-
         // Perhitungan pembayaran pinjaman
         $total_bayar_pinjaman_semua = BayarPinjaman::all()->sum('jumlah');
         $total_bayar_pinjaman_cash = BayarPinjaman::where('pembayaran', 'Cash')->sum('jumlah');
         $total_bayar_pinjaman_tf = BayarPinjaman::where('pembayaran', 'Transfer')->sum('jumlah');
+
 
         // Perhitungan Tabungan
         $total_tabungan = Pemasukan::where('kategori', 'Tabungan')->sum('jumlah');
@@ -117,7 +120,8 @@ class HomeController extends Controller
             'data_pengeluaran_baru',
             'data_pengajuan_baru',
             'data_aset',
-            'data_pinjaman_aset'
+            'data_pinjaman_aset',
+            'total_pengeluaran_kas_3'
         ));
     }
 

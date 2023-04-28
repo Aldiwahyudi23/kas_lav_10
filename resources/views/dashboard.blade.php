@@ -45,7 +45,7 @@
                             <div class="col-sm-3 col-6">
                                 <div class="description-block border-right">
                                     <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 0%</span>
-                                    <h5 class="description-header">{{"Rp" . number_format(  $total_dana_kas - $total_pengeluaran_lain,2,',','.')}}</h5>
+                                    <h5 class="description-header">{{"Rp" . number_format(  $total_dana_kas - $total_pengeluaran_kas_3,2,',','.')}}</h5>
                                     <span class="description-text">TOTAL SALDO KAS</span>
                                 </div>
                                 <!-- /.description-block -->
@@ -272,11 +272,11 @@
                                 </ul>
                                 <ul class="products-list product-list-in-card pl-1 pr-1">
                                     <a href="{{route('anggaran.show',Crypt::encrypt(6))}}" class="product-title">Jumlah dana KAS</a>
-                                    <h5>{{"Rp" . number_format($total_dana_kas - $total_pengeluaran_lain,2,',','.')}}</h5>
+                                    <h5>{{"Rp" . number_format($total_dana_kas - $total_pengeluaran_kas_3,2,',','.')}}</h5>
                                 </ul>
                                 <ul class="products-list product-list-in-card pl-1 pr-1">
                                     <a href="{{Route('table_pengeluaran_detail',Crypt::encrypt(6))}}" class="product-title">Jumlah Dana Kas nu tos ka angge </a>
-                                    <h7>{{ "Rp " . number_format($total_pengeluaran_lain + $total_pengeluaran_usaha + $total_pengeluaran_acara  ,2,',','.') }}</h7>
+                                    <h7>{{ "Rp " . number_format($total_pengeluaran_kas_3  ,2,',','.') }}</h7>
                                     <hr>
                                 </ul>
                                 <ul class="products-list product-list-in-card pl-1 pr-1">
@@ -350,7 +350,7 @@
                             <div class="col-sm-3 col-6">
                                 <div class="description-block border-right">
                                     <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 0%</span>
-                                    <h5 class="description-header">{{"Rp" . number_format(  $total_dana_kas - $total_pengeluaran_lain,2,',','.')}}</h5>
+                                    <h5 class="description-header">{{"Rp" . number_format(  $total_dana_kas - $total_pengeluaran_kas_3,2,',','.')}}</h5>
                                     <span class="description-text">TOTAL SALDO KAS</span>
                                 </div>
                                 <!-- /.description-block -->
