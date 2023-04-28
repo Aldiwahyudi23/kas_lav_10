@@ -63,7 +63,7 @@ class PemasukanController extends Controller
         $id = User::find(Auth::user()->id); // data user di table user
         $data_keluarga = Keluarga::find($id->keluarga_id); //data user di data keluarga
 
-        return view('pemasukan.index', compact('data_pemasukan_semua', 'data_pemasukan_kas_user', 'data_pemasukan_tabungan_user',  'program', 'cek_pengajuan', 'data_anggota', 'data_pemasukan_setor_tunai', 'data1', 'data_keluarga', 'cek_pemasukan_terakhir'));
+        return view('pemasukan.index', compact('data_pemasukan_semua', 'data_pemasukan_kas_user', 'data_pemasukan_tabungan_user',  'program', 'cek_pengajuan', 'data_anggota', 'data_pemasukan_setor_tunai', 'data1', 'data_keluarga', 'cek_pemasukan_terakhir', 'cek_pemasukan_terakhir_total'));
     }
 
     /**
