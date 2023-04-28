@@ -47,9 +47,11 @@ class PemasukanController extends Controller
         ) {
             $cek_pengajuan = Pengajuan::where('kategori', 'Kas')->where('anggota_id', $id_user_hubungan->user_id)->count();
             $cek_pemasukan_terakhir = Pemasukan::orderByRaw('created_at DESC LIMIT 1')->where('kategori', 'KAS')->where('anggota_id', $id_user_hubungan->user_id)->get();
+            $cek_pemasukan_terakhir_total = Pemasukan::orderByRaw('created_at DESC LIMIT 1')->where('kategori', 'KAS')->where('anggota_id', $id_user_hubungan->user_id)->count();
         } else {
             $cek_pengajuan = Pengajuan::where('kategori', 'Kas')->where('anggota_id', Auth::id())->count();
             $cek_pemasukan_terakhir = Pemasukan::orderByRaw('created_at DESC LIMIT 1')->where('kategori', 'KAS')->where('anggota_id', Auth::user()->id)->get();
+            $cek_pemasukan_terakhir_total = Pemasukan::orderByRaw('created_at DESC LIMIT 1')->where('kategori', 'KAS')->where('anggota_id', Auth::user()->id)->count();
         }
 
 

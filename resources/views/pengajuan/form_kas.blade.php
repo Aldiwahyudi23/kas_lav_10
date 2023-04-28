@@ -2,6 +2,11 @@
     <img src="https://media.tenor.com/LAkobF0eiDwAAAAC/assalamu-alaikum-salam.gif" alt="" width="50%">
     <h5 class="text-bold card-header bg-light p-0"> BAYAR KAS</h5>
 </center>
+@if ($cek_pemasukan_terakhir_total == 0)
+<center>
+    <h5>Teu acan aya kas nu masuk</h5>
+</center>
+@else
 <table id="" class="table table-bordered ">
     <tbody>
         @foreach ($cek_pemasukan_terakhir as $data)
@@ -21,6 +26,7 @@
     <h6 class=" text-center">Keterangan</h6>
     {!!$data->keterangan!!}
 </div>
+@endif
 <hr>
 
 <div class="">
