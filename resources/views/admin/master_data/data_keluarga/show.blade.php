@@ -33,8 +33,9 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <img src="{{asset($data_keluarga->foto)}}" alt="" width="70%" class="brand-image img-circle elevation-3 " style="display:block; margin:auto">
+                                    @if($data_keluarga->id == Auth::user()->keluarga_id)
                                     <a href="{{route('keluarga.edit',Crypt::encrypt($data_keluarga->id))}}" class="btn btn-link btn-block btn-light"> Edit Profile</a>
-
+                                    @endif
                                     <tr>
                                         <th style="width:50%">Nama</th>
                                         <td>{{ $data_keluarga->nama}}</td>

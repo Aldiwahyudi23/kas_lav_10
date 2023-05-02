@@ -126,7 +126,7 @@
                             </div>
 
                             <!-- Laporan kanggo ketua -->
-                            @elseif( Auth::user()->role == "Ketua")
+                            @elseif( Auth::user()->role == "Ketua" || Auth::user()->role == "Admin")
                             <hr>
                             <div class="card">
                                 <center>

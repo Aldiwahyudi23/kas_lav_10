@@ -70,7 +70,7 @@
                                     <tr>
                                         <th>hubungan</th>
 
-                                        <td><a href="{{Route('keluarga.detail',Crypt::encrypt($data_anggota->keluarga_id))}}">{{$data_anggota->hubungan}} dari {{$data_anggota->keluarga->nama}} </a> </td>
+                                        <td>{{$data_anggota->hubungan}} dari {{$data_anggota->keluarga->nama}} </td>
 
                                     </tr>
                                     <tr>
@@ -123,7 +123,7 @@
                                     @foreach($data_keluarga_hubungan as $data)
                                     <?php $no++; ?>
                                     <tr>
-                                        <td>{{$no}}</td>
+                                        <td> <img src="{{asset($data->foto)}}" class="img-circle" alt="" width="50px"> </td>
                                         <td> <a href="{{Route('keluarga.detail',Crypt::encrypt($data->id))}}" class="">{{$data->nama}}</a></td>
                                         <td> <a href="{{route('keluarga.detail',Crypt::encrypt($data->id))}}" class=""> {{$data->hubungan}} {{$data->anak_ke}} Dari {{$data->keluarga->nama}} </a></td>
                                         <td>

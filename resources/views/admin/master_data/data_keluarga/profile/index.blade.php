@@ -98,6 +98,11 @@
                     <th>Anak Ke</th>
                     <td>{{$data_keluarga->anak_ke}}</td>
                 </tr>
+                <tr>
+                    <th>
+                        <a href="{{Route('keluarga.detail',Crypt::encrypt($data_keluarga->id))}}">Klik & Cek Kanggo ningal Data Keluarga anjeun</a>
+                    </th>
+                </tr>
             </table>
         </div>
         <!-- /.card-body -->

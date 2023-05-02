@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Anggota;
 use App\Models\Foto;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
+use Faker\Core\DateTime as CoreDateTime;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -412,20 +415,25 @@ class KeluargaController extends Controller
         }
     }
 
-    public function keturunan()
-    {
-        $data_keluarga_tugu = Keluarga::where('tugu', 'ya')->get();
-        $data_keluarga = Keluarga::all();
-        return view('admin.master_data.data_keluarga.keturunan.index', compact('data_keluarga', 'data_keluarga_tugu'));
-    }
-    public function keturunan_detail($id)
+    public function keturunan($id)
     {
         $id = Crypt::decrypt($id);
         $data_anggota = Keluarga::find($id);
 
         $data_keluarga_hubungan = Keluarga::where('keluarga_id', $id)->get();
         $data_keluarga = Keluarga::all();
+        $data_keluarga_tugu = Keluarga::where('tugu', 'ya')->get();
 
-        return view('admin.master_data.data_keluarga.keturunan.detail', compact('data_keluarga', 'data_anggota', 'data_keluarga_hubungan'));
+        return view('admin.master_data.data_keluarga.keturunan.index', compact('data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'data_keluarga_tugu'));
+    }
+    public function keturunan_detail(Request $request)
+    {
+
+        $cari = $request->cari;
+
+        $data_keluarga = Keluarga::where('nama', 'like', "%" . $cari . "%")->paginate();
+
+
+        return view('admin.master_data.data_keluarga.keturunan.detail', compact('data_keluarga'));
     }
 }

@@ -82,7 +82,7 @@
                                     </tr>
                                     <tr>
                                         <td width="50"><i class="nav-icon fas fa-list"></i></td>
-                                        <td> <a href="{{Route('keturunan')}} " class="text-dark">Cek keluarga<a></td>
+                                        <td> <a href="{{Route('keturunan_detail',crypt::encrypt(3))}} " class="text-dark">Cek keluarga<a></td>
                                     </tr>
                                 </table>
                             </div>

@@ -143,8 +143,8 @@ Route::get('/pengaturan/email', [KeluargaController::class, 'edit_email'])->midd
 Route::post('/pengaturan/ubah-email', [KeluargaController::class, 'ubah_email'])->middleware(['auth'])->name('pengaturan.ubah-email');
 Route::get('/pengaturan/password', [KeluargaController::class, 'edit_password'])->middleware(['auth', 'verified'])->name('pengaturan.password');
 Route::post('/pengaturan/ubah-password', [KeluargaController::class, 'ubah_password'])->middleware(['auth', 'verified'])->name('pengaturan.ubah-password');
-Route::get('/keturunan', [KeluargaController::class, 'keturunan'])->name('keturunan');
-Route::get('/keturunan/detail/(id)', [KeluargaController::class, 'keturunan_detail'])->name('keturunan_detail');
+Route::get('/keturunan/cari/', [KeluargaController::class, 'keturunan_detail'])->name('cari');
+Route::get('/keturunan/detail/{id}', [KeluargaController::class, 'keturunan'])->name('keturunan_detail');
 
 //Peraturan
 Route::get('/peraturan', [HomeController::class, 'peraturan'])->middleware(['auth']);

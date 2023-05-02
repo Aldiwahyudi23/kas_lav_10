@@ -11,7 +11,7 @@
                         <h5 class="card-title">Laporan Kas</h5>
 
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <button type="button" class="btn btn-tool" data-card-widget="it">
                                 <i class="fas fa-minus"></i>
                             </button>
                             <div class="btn-group">
