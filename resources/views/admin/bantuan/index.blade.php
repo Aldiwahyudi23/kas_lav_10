@@ -35,6 +35,12 @@
                                 </div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="account-company">Video</label>
+                                <input type="file" class="form-control" name="video" id="video" required />
+                                <span class="text-danger" style="font-size: 13px">Lebih sae ngange video.</span>
+                            </div>
+
 
                             <hr>
                             <button onclick="tombol()" id="myBtn" type="submit" class="btn btn-success btn-sm"><i class="fas fa-save"></i> TAMBAH</button>

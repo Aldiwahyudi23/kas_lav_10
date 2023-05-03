@@ -164,6 +164,12 @@ class AnggotaController extends Controller
         $data_user->foto = $data->foto;
         $data_user->update();
 
+        $foto = new Foto;
+        $foto->keluarga_id = $data_user->id;
+        $foto->user_id = $data->id;
+        $foto->foto  = $data->foto;
+        $foto->save();
+
         return redirect('anggota')->with('infoes', 'Data Anggota Keluarga Parantos di edit');
     }
 
@@ -234,22 +240,28 @@ class AnggotaController extends Controller
         $nama = 'anggota-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('/img/profile'), $nama);
 
-        $data_user = User::find($id);
-        $data_user->foto = "/img/profile/$nama";
-        $data_user->update();
 
-        $data_anggota = Keluarga::find($data_user->keluarga_id);
+        $data_anggota = Keluarga::find($id);
         $data_anggota->foto = "/img/profile/$nama";
         $data_anggota->update();
 
+        if ($data_anggota->user_id == true) {
+            $data_user = User::find($data_anggota->user_id);
+            $data_user->foto = "/img/profile/$nama";
+            $data_user->update();
+        } else {
+            $data_user = User::find(1);
+        }
+
+
         $foto = new Foto;
-        $foto->keluarga_id = $data_user->keluarga_id;
-        $foto->user_id = $id;
+        $foto->keluarga_id = $data_anggota->id;
+        $foto->user_id = $data_user->id;
         $foto->foto  = $data_anggota->foto;
         $foto->save();
 
 
-        return redirect('profile')->with('sukses', 'Foto Profile berhasil di gentos, Asikkk cakep nya ganti foto anyar.');
+        return redirect()->back()->with('sukses', 'Foto Profile berhasil di gentos, Asikkk cakep nya ganti foto anyar.');
     }
 
     public function is_active(Request $Request, $id)

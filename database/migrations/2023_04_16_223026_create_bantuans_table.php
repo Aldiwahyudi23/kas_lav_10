@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_bantuan');
             $table->longText('deskripsi');
+            $table->longText('video');
             $table->timestamps();
         });
     }

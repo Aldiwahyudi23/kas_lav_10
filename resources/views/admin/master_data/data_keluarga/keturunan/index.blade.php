@@ -83,7 +83,24 @@
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
-
+                        <div class="col-md-12">
+                            <!-- USERS LIST -->
+                            <div class="card-body p-0">
+                                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                                    @foreach($foto as $data)
+                                    <div class="product-img">
+                                        <a href="{{ asset( $data->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery">
+                                            <img src="{{ asset( $data->foto) }}" alt="Product Image" width="65px" height="65px" alt="Saya" class="brand-image img-circle elevation-3">
+                                        </a>
+                                        <center>
+                                            <span class="users-list-date">{{date("Y-M",strtotime($data->created_at))}}</span>
+                                        </center>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
                         <!-- this row will not appear when printing -->
                         <div class="row no-print">
                             <div class="col-12">

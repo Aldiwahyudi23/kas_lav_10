@@ -40,6 +40,13 @@
                     <p> {!! $data_bantuan->deskripsi !!}</p>
                 </table>
 
+                @if ($data_bantuan->video == true)
+                <center>
+                    <p>Cek Video na</p>
+                </center>
+                <video src="{{asset($data_bantuan->video)}}" controls width="100%"></video>
+                @else
+                @endif
             </div>
         </div>
     </div><!-- /.container-fluid -->

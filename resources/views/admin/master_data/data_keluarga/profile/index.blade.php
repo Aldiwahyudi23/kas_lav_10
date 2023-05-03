@@ -16,9 +16,7 @@
                 </a>
 
             </div>
-            <form action="{{ Route('anggota.update.foto', Crypt::encrypt(Auth::user()->id)) }}" method="post" enctype="multipart/form-data">
-                {{csrf_field()}}<input type="file" class="form-control" name=" foto" id="foto"> <input type="hidden" class="form-control" name=" user" id="user" value="{{$data_keluarga->keluarga_id}}"> <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-file-upload"></i> </button>
-            </form>
+
 
             <h3 class="profile-username text-center">{{ $data_keluarga->nama }}</h3>
             <h5 class="profile-username text-center">( {{ Auth::user()->name }} )</h5>
@@ -37,22 +35,29 @@
 </div>
 <div class="col-12">
     <!-- Profile Image -->
-    <div class="card card-primary card-outline">
-        <div class="card-body box-profile">
-            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                @foreach($foto as $data)
-                <div class="product-img">
-                    <a href="{{ asset( $data->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery">
+    <form action="{{ Route('anggota.update.foto', Crypt::encrypt($data_keluarga->id)) }}" method="post" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <label for="foto">Ganti Foto Profile</label>
+        <input type="file" class="form-control" name=" foto" id="foto"> <input type="hidden" class="form-control" name=" user" id="user" value="{{$data_keluarga->keluarga_id}}">
 
-                        <img src="{{ asset( $data->foto) }}" alt="Product Image" width="65px" height="65px" alt="Saya" class="brand-image img-circle elevation-3">
-                    </a>
+        <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                    @foreach($foto as $data)
+                    <div class="product-img">
+                        <a href="{{ asset( $data->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery">
+
+                            <img src="{{ asset( $data->foto) }}" alt="Product Image" width="65px" height="65px" alt="Saya" class="brand-image img-circle elevation-3">
+                        </a>
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
+            <!-- /.card-body -->
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-file-upload"></i> Upload</button>
+    </form>
+</div>
+<!-- /.card -->
 </div>
 <div class="col-12">
     <div class="card card-primary">
@@ -92,7 +97,7 @@
                 </tr>
                 <tr>
                     <th>hubungan</th>
-                    <td>{{$data_keluarga->hubungan}} dari {{$data_keluarga->keluarga->nama}} </td>
+                    <td><a href="{{Route('keluarga.detail',Crypt::encrypt($data_keluarga->keluarga_id))}}">{{$data_keluarga->hubungan}} dari {{$data_keluarga->keluarga->nama}} </a> </td>
                 </tr>
                 <tr>
                     <th>Anak Ke</th>

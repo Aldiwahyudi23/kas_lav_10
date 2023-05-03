@@ -44,10 +44,18 @@ class BantuanController extends Controller
                 'deskripsi.required'  => "Deskripsi kedah di isi sareng detail",
             ]
         );
+        if ($request->video) {
+            $file = $request->file('video');
+            $nama = 'Video-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/video/bantuan'), $nama);
+        }
 
         $data = new Bantuan();
         $data->nama_bantuan     = $request->nama_bantuan;
         $data->deskripsi        = $request->deskripsi;
+        if ($request->video) {
+            $data->video          = "/video/bantuan/$nama";
+        }
 
         $data->save();
         return redirect()->back()->with('sukses', 'Data bantuan Parantos ka simpen');
@@ -94,9 +102,18 @@ class BantuanController extends Controller
             ]
         );
 
+        if ($request->video) {
+            $file = $request->file('video');
+            $nama = 'Video-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/video/bantuan'), $nama);
+        }
+
         $data = Bantuan::find($id);
         $data->nama_bantuan     = $request->nama_bantuan;
         $data->deskripsi        = $request->deskripsi;
+        if ($request->video) {
+            $data->video          = "/video/bantuan/$nama";
+        }
 
         $data->update();
         return redirect()->back()->with('infoes', 'Data bantuan Parantos ka geuntos');

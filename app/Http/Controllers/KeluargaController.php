@@ -163,9 +163,11 @@ class KeluargaController extends Controller
         $data_anggota = Keluarga::find($id);
 
         $data_keluarga_hubungan = Keluarga::where('keluarga_id', $id)->get();
+
+        $foto = Foto::where('keluarga_id', $data_anggota->id)->get();
         $data_keluarga = Keluarga::all();
 
-        return view('admin.master_data.data_keluarga.detail', compact('data_keluarga', 'data_anggota', 'data_keluarga_hubungan'));
+        return view('admin.master_data.data_keluarga.detail', compact('data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'foto'));
     }
 
     /**
@@ -262,6 +264,20 @@ class KeluargaController extends Controller
         } else {
         }
         $data->update();
+
+        if ($data->user_id == true) {
+            $data_user = User::find($data->user_id);
+            $data_user->foto = "/img/profile/$nama";
+            $data_user->update();
+        } else {
+            $data_user = User::find(1);
+        }
+
+        $foto = new Foto;
+        $foto->keluarga_id = $data->id;
+        $foto->user_id = $data_user->id;
+        $foto->foto  = $data->foto;
+        $foto->save();
 
         if (Auth::user()->role == 'Admin') {
             return redirect()->back()->with('infoes', 'Data Anggota Keluarga Parantos di edit');
@@ -419,12 +435,13 @@ class KeluargaController extends Controller
     {
         $id = Crypt::decrypt($id);
         $data_anggota = Keluarga::find($id);
+        $foto = Foto::where('keluarga_id', $data_anggota->id)->get();
 
         $data_keluarga_hubungan = Keluarga::where('keluarga_id', $id)->get();
         $data_keluarga = Keluarga::all();
         $data_keluarga_tugu = Keluarga::where('tugu', 'ya')->get();
 
-        return view('admin.master_data.data_keluarga.keturunan.index', compact('data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'data_keluarga_tugu'));
+        return view('admin.master_data.data_keluarga.keturunan.index', compact('foto', 'data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'data_keluarga_tugu'));
     }
     public function keturunan_detail(Request $request)
     {

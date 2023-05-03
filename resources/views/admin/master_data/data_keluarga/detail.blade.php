@@ -84,18 +84,47 @@
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
+                    <div class="col-12">
 
-                    <!-- this row will not appear when printing -->
-                    <div class="row no-print">
-                        <div class="col-12">
-                            <form action="/pengajuan/bayar/anggota/tambah" method="post">
-                                @csrf
-                        </div>
+                        <form action="{{ Route('anggota.update.foto', Crypt::encrypt($data_anggota->id)) }}" method="post" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <label for="foto">Ganti Foto Profile</label>
+                            <input type="file" class="form-control" name=" foto" id="foto"> <input type="hidden" class="form-control" name=" user" id="user" value="{{$data_anggota->keluarga_id}}">
+
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                                        @foreach($foto as $data)
+                                        <div class="product-img">
+                                            <a href="{{ asset( $data->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery">
+
+                                                <img src="{{ asset( $data->foto) }}" alt="Product Image" width="65px" height="65px" alt="Saya" class="brand-image img-circle elevation-3">
+                                            </a>
+                                            <center>
+                                                <span class="users-list-date">{{date("Y-M",strtotime($data->created_at))}}</span>
+                                            </center>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-file-upload"></i> Upload</button>
+                        </form>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- this row will not appear when printing -->
+                <div class="row no-print">
+                    <div class="col-12">
+                        <form action="/pengajuan/bayar/anggota/tambah" method="post">
+                            @csrf
                     </div>
                 </div>
-                <!-- /.invoice -->
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            </div>
+            <!-- /.invoice -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
 <section class="content card col-12" style="padding: 10px 10px 10px 10px ">

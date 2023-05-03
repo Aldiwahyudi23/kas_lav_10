@@ -139,6 +139,13 @@
                     <div class="card-body">
                         <p>{!!$detail_bantuan->deskripsi!!}</p>
                     </div>
+                    @if ($detail_bantuan->video == true)
+                    <center>
+                        <p>Cek Video na</p>
+                    </center>
+                    <video src="{{asset($detail_bantuan->video)}}" controls width="100%"></video>
+                    @else
+                    @endif
                     <!-- /.row -->
                 </div><!--/. container-fluid -->
             </section>
