@@ -60,7 +60,9 @@ class PengeluaranController extends Controller
         $dana_acara = Pengeluaran::orderByRaw('created_at DESC')->where('anggaran_id', 5)->get();
         $dana_lain = Pengeluaran::orderByRaw('created_at DESC')->where('anggaran_id', 6)->get();
 
-        return view('pengeluaran.index', compact('data_pengeluaran_semua', 'data_pengeluaran_pinjaman', 'program', 'cek_pengajuan', 'cek_pengajuan_proses', 'cek_pengeluaran_pinjaman_user', 'cek_pengeluaran_pinjaman', 'cek_total_pinjaman', 'jatah', 'data_anggaran', 'data_anggaran_max_pinjaman', 'dana_darurat', 'dana_amal', 'dana_pinjam', 'dana_usaha', 'dana_acara', 'dana_lain'));
+        $keluarga = Keluarga::all();
+
+        return view('pengeluaran.index', compact('keluarga', 'data_pengeluaran_semua', 'data_pengeluaran_pinjaman', 'program', 'cek_pengajuan', 'cek_pengajuan_proses', 'cek_pengeluaran_pinjaman_user', 'cek_pengeluaran_pinjaman', 'cek_total_pinjaman', 'jatah', 'data_anggaran', 'data_anggaran_max_pinjaman', 'dana_darurat', 'dana_amal', 'dana_pinjam', 'dana_usaha', 'dana_acara', 'dana_lain'));
     }
 
     /**
@@ -119,6 +121,8 @@ class PengeluaranController extends Controller
         $data_pengeluaran->jumlah = $request->jumlah;
         $data_pengeluaran->anggaran_id = $request->anggaran_id;
         $data_pengeluaran->anggota_id = Auth::user()->id;
+        $data_pengeluaran->keluarga_id = Auth::user()->id;
+        $data_pengeluaran->pengurus_id = Auth::user()->id;
         $data_pengeluaran->alasan = $request->keterangan;
         $data_pengeluaran->tanggal = Carbon::now();
 
@@ -292,7 +296,7 @@ class PengeluaranController extends Controller
     }
     public function trash()
     {
-        $data_pengeluaran = Pengeluaran::onlyTrashed()->get();
+        $data_pengeluaran = Pengeluaran::orderByRaw('created_at DESC')->onlyTrashed()->get();
 
         return view('pengeluaran.trash', compact('data_pengeluaran'));
     }

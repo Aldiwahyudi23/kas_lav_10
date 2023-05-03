@@ -73,6 +73,7 @@ class HomeController extends Controller
         $saldo_kas = $total_pemasukan_kas - $total_pengeluaran_kas;
         // Perhitungan pembayaran pinjaman
         $total_bayar_pinjaman_semua = BayarPinjaman::all()->sum('jumlah');
+        $total_bayar_pinjaman_lebih = BayarPinjaman::all()->sum('jumlah_lebih');
         $total_bayar_pinjaman_cash = BayarPinjaman::where('pembayaran', 'Cash')->sum('jumlah');
         $total_bayar_pinjaman_tf = BayarPinjaman::where('pembayaran', 'Transfer')->sum('jumlah');
 
@@ -121,7 +122,8 @@ class HomeController extends Controller
             'data_pengajuan_baru',
             'data_aset',
             'data_pinjaman_aset',
-            'total_pengeluaran_kas_3'
+            'total_pengeluaran_kas_3',
+            'total_bayar_pinjaman_lebih'
         ));
     }
 

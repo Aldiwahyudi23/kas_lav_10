@@ -25,14 +25,34 @@
                                     <td>{{ $data_pinjaman->anggaran->nama_anggaran }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Pengurus</td>
+                                    <td>Nama Anggota</td>
                                     <td>:</td>
                                     <td>{{ $data_pinjaman->anggota->name }}</td>
                                 </tr>
+                                <?php
+
+                                use App\Models\Keluarga;
+
+                                $keluarga = Keluarga::find($data_pinjaman->keluarga_id);
+                                ?>
+                                @if ($data_pinjaman->anggota_id == $data_pinjaman->keluarga_id)
+
+                                @else
+                                <tr>
+                                    <td>Nama Keluarga</td>
+                                    <td>:</td>
+                                    <td>{{$keluarga->nama}}</td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td>Nominal</td>
                                     <td>:</td>
                                     <td>{{ "Rp " . number_format($data_pinjaman->jumlah,2,',','.') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Di Setujui Oleh</td>
+                                    <td>:</td>
+                                    <td>{{$data_pinjaman->pengurus->name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Tangaal Pengajuan</td>
@@ -82,9 +102,15 @@
                                 ?>
                                 <tr>
                                     <th> <a href="{{Route('pinjaman.edit',Crypt::encrypt($data->id))}}"> bayar {{$no}}</a> </th>
-                                    <td>{{ "Rp " . number_format($data->jumlah,2,',','.') }}</td>
+                                    <td>{{ "Rp " . number_format($data->jumlah,2,',','.') }} <br> <br>
+                                        @if($data->jumlah_lebih == 0)
+                                        @else
+                                        Terhitung pembayaran aya lebihna <b> ({{ "Rp " . number_format($data->jumlah_lebih,2,',','.') }})</b> Masuk kana Dana KAS
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
+
                                 @if ($total_bayar_pinjam - $data_pinjaman->jumlah >= 1)
                                 <tr>
                                     <th>Lebihna</th>

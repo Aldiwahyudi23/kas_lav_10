@@ -51,10 +51,25 @@
                                     <td>{{ $data_pengajuan->kategori }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Anggoota</td>
+                                    <td>Di Input Oleh</td>
                                     <td>:</td>
                                     <td>{{ $data_pengajuan->anggota->name }}</td>
                                 </tr>
+
+                                <?php
+
+                                use App\Models\Keluarga;
+
+                                $keluarga = Keluarga::find($data_pengajuan->pengaju_id);
+                                ?>
+                                @if ($data_pengajuan->anggota_id == $data_pengajuan->pengaju_id)
+                                @else
+                                <tr>
+                                    <td>Nama Keluarga</td>
+                                    <td>:</td>
+                                    <td>{{$keluarga->nama}}</td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td>Nominal</td>
                                     <td>:</td>
@@ -96,6 +111,7 @@
                             {{csrf_field()}}
                             <input type="hidden" id="pengajuan_id" name="pengajuan_id" value="{{ $data_pengajuan->id }}">
                             <input type="hidden" id="anggota_id" name="anggota_id" value="{{ $data_pengajuan->anggota_id }}">
+                            <input type="hidden" id="pengaju_id" name="pengaju_id" value="{{ $data_pengajuan->pengaju_id }}">
                             <input type="hidden" id="jumlah" name="jumlah" value=" {{ $data_pengajuan->jumlah }}">
                             <input type="hidden" id="keterangan" name="keterangan" value="{{ $data_pengajuan->keterangan }}">
                             <input type="hidden" id="tanggal" name="tanggal" value="{{ $data_pengajuan->created_at }}">

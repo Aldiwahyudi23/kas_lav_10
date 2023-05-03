@@ -291,7 +291,7 @@ class PemasukanController extends Controller
     }
     public function trash()
     {
-        $data_pemasukan = Pemasukan::onlyTrashed()->get();
+        $data_pemasukan = Pemasukan::orderByRaw('created_at DESC')->onlyTrashed()->get();
 
         return view('pemasukan.trash', compact('data_pemasukan'));
     }

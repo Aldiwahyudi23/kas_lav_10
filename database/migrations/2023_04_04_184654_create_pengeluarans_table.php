@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('status')->nullable();
             $table->foreignId('anggaran_id')->references('id')->on('anggarans');
             $table->foreignId('anggota_id')->references('id')->on('users')->nullable();
+            $table->foreignId('keluarga_id')->nullable();
+            $table->foreignId('pengurus_id')->references('id')->on('users')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

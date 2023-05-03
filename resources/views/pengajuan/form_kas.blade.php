@@ -72,7 +72,7 @@ $sisa_bulan = $sisa_kas / 50000;
             <div class="form-group row">
                 <label for="jumlah">Nominal</label>
                 <input type="hidden" name="anggota_id" id="anggota_id" value="{{Auth::id()}}">
-                <input type="hidden" name="pengaju_id" id="pengaju_id" value="{{Auth::id()}}">
+                <input type="hidden" name="pengaju_id" id="pengaju_id" value="{{Auth::user()->id}}">
                 <input type="hidden" name="kategori" id="kategori" value="Kas">
                 <input type="text" id="jumlah" name="jumlah" value="{{ old('jumlah') }}" placeholder="Cont : 50000    jangan pake titik ataupun koma" class="form-control col-12 @error('jumlah') is-invalid @enderror">
                 @error('jumlah')

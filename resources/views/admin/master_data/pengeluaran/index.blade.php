@@ -67,6 +67,8 @@
                                      <th>Anggaran</th>
                                      <th>Nama / Di Input</th>
                                      <th>Nominal Kas</th>
+                                     <th>iD Keluarga</th>
+                                     <th>Di Setujui Oleh</th>
                                      <th>Bulan Pembayaran</th>
                                      <th>Pembayaran</th>
                                      <th>Status</th>
@@ -80,19 +82,33 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                 <?php $no = 0; ?>
+                                 <?php
+
+                                    use App\Models\Keluarga;
+
+                                    $no = 0;
+                                    ?>
                                  @php
                                  $total = 0;
                                  @endphp
                                  @foreach($data_pengeluaran as $data)
                                  <?php $no++;
                                     $status2 = DB::table('pengeluarans')->find($data->id);
+                                    $keluarga = Keluarga::Find($data->keluarga_id);
                                     ?>
                                  <tr>
                                      <td>{{$no}}</td>
                                      <td>{{$data->anggaran->nama_anggaran}}</td>
                                      <td>{{$data->anggota->name}}</td>
                                      <td>{{ "Rp " . number_format($data->jumlah,2,',','.') }}</td>
+
+                                     @if ($data->anggota_id == $data->keluarga_id)
+                                     <td></td>
+                                     @else
+                                     <td>{{$data->keluarga_id}}</td>
+                                     @endif
+                                     <td> {{$data->pengurus->name}}</td>
+
                                      <td>{{$data->tanggal}}</td>
                                      <td>{{$data->pembayaran}}</td>
                                      <td>

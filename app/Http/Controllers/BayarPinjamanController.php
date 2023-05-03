@@ -59,7 +59,6 @@ class BayarPinjamanController extends Controller
         $data_pemasukan = new BayarPinjaman();
         $data_pemasukan->anggota_id = $request->anggota_id;
         $data_pemasukan->pengaju_id = $request->pengaju_id;
-        $data_pemasukan->jumlah = $request->jumlah;
         $data_pemasukan->pembayaran = $request->pembayaran;
         $data_pemasukan->pengeluaran_id = $request->pengeluaran_id;
         $data_pemasukan->keterangan = $request->keterangan;
@@ -72,6 +71,21 @@ class BayarPinjamanController extends Controller
         if ($request->foto1) {
             $data_pemasukan->foto          = $request->foto1;
         }
+
+        $cek_pinjaman = Pengeluaran::Find($request->pengeluaran_id); // mengambil data dari pengeluaran sesuai id 
+        $jumlah_pinjaman = $cek_pinjaman->jumlah; //jumlah pinjaman tina data nu di luhur
+
+        $cek_bayarpinjaman = BayarPinjaman::where('pengeluaran_id', $request->pengeluaran_id)->sum('jumlah');
+        $jumlah_bayarpinjaman = $cek_bayarpinjaman + $request->jumlah;
+
+        if ($jumlah_bayarpinjaman >= $jumlah_pinjaman) {
+            $data_pemasukan->jumlah = $jumlah_pinjaman - $cek_bayarpinjaman;
+            $data_pemasukan->jumlah_lebih = $jumlah_bayarpinjaman - $jumlah_pinjaman;
+        } else {
+            $data_pemasukan->jumlah = $request->jumlah;
+            $data_pemasukan->jumlah_lebih = 0;
+        }
+
         // Kanggo send notifikasi
         $ketua = User::where('role', 'Ketua')->get();
         $seker = User::where('role', 'Admin')->get();
@@ -113,10 +127,8 @@ class BayarPinjamanController extends Controller
         $data_pemasukan->save();
         //jika pembayaran Lunas Keterangan dina data pengeluaran berubah
         // Sekalian Edit pengeluaran
-        $data_pinjaman = Pengeluaran::find($request->pengeluaran_id);
-        $jumlahna = $request->sekertaris + $request->jumlah;
 
-        if ($jumlahna >= $data_pinjaman->jumlah) {
+        if ($jumlah_bayarpinjaman >= $jumlah_pinjaman) {
             $data_pengeluaran = Pengeluaran::find($request->pengeluaran_id);
             $data_pengeluaran->status = "Lunas";
             $data_pengeluaran->update();

@@ -35,9 +35,15 @@
                                     <td>{{ $data_bayar_pinjaman->pengaju->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nominal</td>
+                                    <td>Nominal Bayar</td>
                                     <td>:</td>
-                                    <td>{{ "Rp " . number_format($data_bayar_pinjaman->jumlah,2,',','.') }}</td>
+                                    <td>{{ "Rp " . number_format($data_bayar_pinjaman->jumlah,2,',','.') }} <br>
+                                        @if($data_bayar_pinjaman->jumlah_lebih == 0)
+                                        @else
+                                        Terhitung pembayaran aya lebihna ({{ "Rp " . number_format($data_bayar_pinjaman->jumlah_lebih,2,',','.') }})
+                                        @endif
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Pembayaran</td>

@@ -15,6 +15,10 @@ class Pengeluaran extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function pengurus()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function anggaran()
     {
         return $this->belongsTo(Anggaran::class);

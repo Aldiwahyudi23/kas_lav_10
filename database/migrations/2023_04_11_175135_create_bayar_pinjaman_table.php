@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('tanggal');
             $table->integer('jumlah');
+            $table->integer('jumlah_lebih');
             $table->string('keterangan', 500);
             $table->string('pembayaran')->nullable();
             $table->foreignId('pengeluaran_id')->references('id')->on('pengeluarans');

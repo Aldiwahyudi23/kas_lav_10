@@ -67,7 +67,7 @@ class PengajuanController extends Controller
         $data->kategori = $request->kategori;
         $data->tanggal = $tanggal;
         $data->status = "Proses";
-        $data->pengaju_id = Auth::user()->id;
+        $data->pengaju_id = $request->pengaju_id;
         if ($data_keluarga->hubungan == "Istri" || $data_keluarga->hubungan == "Suami") {
             $data->anggota_id = $id_user_hubungan->user_id;
         } else {
@@ -371,7 +371,7 @@ class PengajuanController extends Controller
             Notification::sendnow($ketua, new EmailNotification($project));
             $data_pengajuan->update();
         }
-        if (Auth::user()->role == "Ketua") {
+        if (Auth::user()->role == "Ketua" || Auth::user()->role == "Admin") {
             $request->validate(
                 [
                     'sekertaris' => 'required',
@@ -433,6 +433,8 @@ class PengajuanController extends Controller
 
                 $data_pengajuan = new Pengeluaran();
                 $data_pengajuan->anggota_id = $request->anggota_id;
+                $data_pengajuan->keluarga_id = $request->pengaju_id;
+                $data_pengajuan->pengurus_id = Auth::user()->id;
                 $data_pengajuan->jumlah = $request->jumlah;
                 $data_pengajuan->anggaran_id = 3;
                 $data_pengajuan->alasan = $request->keterangan;
@@ -507,7 +509,7 @@ class PengajuanController extends Controller
     }
     public function trash()
     {
-        $data_pengajuan = Pengajuan::onlyTrashed()->get();
+        $data_pengajuan = Pengajuan::orderByRaw('created_at DESC')->onlyTrashed()->get();
 
         return view('pengajuan.trash', compact('data_pengajuan'));
     }

@@ -56,11 +56,26 @@
                                     <td>:</td>
                                     <td>{{ $data_pengajuan->anggota->name }}</td>
                                 </tr>
+                                <?php
+
+                                use App\Models\Keluarga;
+
+                                $keluarga = Keluarga::find($data_pengajuan->pengaju_id);
+                                ?>
+                                @if ($data_pengajuan->anggota_id == $data_pengajuan->pengaju_id)
                                 <tr>
                                     <td>Di Input Oleh</td>
                                     <td>:</td>
                                     <td>{{ $data_pengajuan->pengaju->name }}</td>
                                 </tr>
+                                @else
+                                <tr>
+                                    <td>Nama Keluarga</td>
+                                    <td>:</td>
+                                    <td>{{$keluarga->nama}}</td>
+                                </tr>
+                                @endif
+
                                 <td>Nominal</td>
                                 <td>:</td>
                                 <td>{{ "Rp " . number_format($data_pengajuan->jumlah,2,',','.') }}</td>

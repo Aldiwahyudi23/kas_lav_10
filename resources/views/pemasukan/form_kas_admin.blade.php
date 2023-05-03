@@ -28,6 +28,7 @@ $tanggal = Carbon::now();
             </div>
             @enderror
         </div>
+        <input type="hidden" name="pengaju_id" id="pengaju_id" value="{{Auth::user()->id}}">
         @if(Auth::user()->role == "Admin")
         <div class="form-group row">
             <label for="kategori">Kategori</label>
