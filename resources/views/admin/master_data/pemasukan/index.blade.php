@@ -58,7 +58,7 @@
                                      <td>{{$no}}</td>
                                      <td>{{$data->kategori}}</td>
                                      <td>{{$data->anggota->name}}</td>
-                                     <td>{{ "Rp " . number_format($data->jumlah,2,',','.') }}</td>
+                                     <td>{{$data->jumlah}}</td>
                                      <td>{{date('M-y',strtotime($data->tanggal)) }}</td>
                                      <td>{{$data->pembayaran}}</td>
                                      <td>{!!$data->keterangan!!}</td>

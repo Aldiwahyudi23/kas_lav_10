@@ -100,7 +100,7 @@
                                      <td>{{$no}}</td>
                                      <td>{{$data->anggaran->nama_anggaran}}</td>
                                      <td>{{$data->anggota->name}}</td>
-                                     <td>{{ "Rp " . number_format($data->jumlah,2,',','.') }}</td>
+                                     <td>{{$data->jumlah}}</td>
 
                                      @if ($data->anggota_id == $data->keluarga_id)
                                      <td></td>
