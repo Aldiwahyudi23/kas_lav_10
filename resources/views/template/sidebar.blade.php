@@ -244,6 +244,12 @@ $data_pinjaman = AsetPinjam::find(1);
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{Route('foto.trash')}}" class="nav-link" id="TrashAnggaran">
+                                <i class="fas fa-home nav-icon"></i>
+                                <p>Trash Foto Keluarga</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{Route('anggota.trash')}}" class="nav-link" id="TrashAnggaran">
                                 <i class="fas fa-home nav-icon"></i>
                                 <p>Trash user</p>

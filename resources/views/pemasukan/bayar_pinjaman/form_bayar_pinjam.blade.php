@@ -165,6 +165,7 @@
                             <div class="form-group row">
                                 <label for="jumlah">Nominal</label>
                                 <input type="hidden" name="anggota_id" id="anggota_id" value="{{Auth::id()}}">
+                                <input type="hidden" name="pengaju_id" id="pengaju_id" value="{{Auth::id()}}">
                                 <input type="hidden" name="kategori" id="kategori" value="Bayar_Pinjaman">
                                 <input type="hidden" id="sekertaris" name="sekertaris" value="{{$total_bayar_pinjam}}">
                                 <input type="hidden" id="lama" name="lama" value="{{$no}}">

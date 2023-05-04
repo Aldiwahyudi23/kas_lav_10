@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Foto extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     public function user()
     {
@@ -15,6 +17,6 @@ class Foto extends Model
     }
     public function keluarga()
     {
-        return $this->belongsTo(AnggotaKeluarga::class);
+        return $this->belongsTo(Keluarga::class);
     }
 }

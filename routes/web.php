@@ -14,6 +14,7 @@ use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\FotoController;
 use App\Http\Controllers\RoleProgramController;
 use Illuminate\Support\Facades\Route;
 
@@ -149,5 +150,12 @@ Route::get('/keturunan/detail/{id}', [KeluargaController::class, 'keturunan'])->
 //Peraturan
 Route::get('/peraturan', [HomeController::class, 'peraturan'])->middleware(['auth']);
 Route::resource('roleprogram', RoleProgramController::class)->middleware(['auth', 'verified']);
+
+//Data Foto
+Route::resource('foto', FotoController::class)->middleware(['auth', 'verified']);
+Route::get('/fotos/trash/', [FotoController::class, 'trash'])->middleware(['auth', 'verified', 'checkRole:Admin'])->name('foto.trash');
+Route::post('/fotos/kill/{id}', [FotoController::class, 'kill'])->middleware(['auth', 'verified', 'checkRole:Admin'])->name('foto.kill');
+Route::get('/fotos/restore/{id}', [FotoController::class, 'restore'])->middleware(['auth', 'verified', 'checkRole:Admin'])->name('foto.restore');
+
 
 require __DIR__ . '/auth.php';

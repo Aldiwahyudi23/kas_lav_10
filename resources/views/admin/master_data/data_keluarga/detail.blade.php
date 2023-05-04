@@ -103,6 +103,13 @@
                                             </a>
                                             <center>
                                                 <span class="users-list-date">{{date("Y-M",strtotime($data->created_at))}}</span>
+                                                <form action="{{route('foto.destroy',Crypt::encrypt($data->id))}}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    @if (auth()->user()->role == 'Admin')
+                                                    <button class="btn btn-link btn-sm mt-2"><i class="nav-icon fas fa-trash-alt" onclick="return confirm('Leres bade ngahapus data anu namina {{$data->nama}}  ?')"></i> </button>
+                                                    @endif
+                                                </form>
                                             </center>
                                         </div>
                                         @endforeach

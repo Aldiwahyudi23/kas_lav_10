@@ -102,7 +102,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="account-company">Foto Profile</label>
-                                                    <input type="file" class="form-control" value="{{ $data_keluarga->foto }}" name="foto" id="foto">
+                                                    <input type="file" class="form-control" value="" name="foto" id="foto">
                                                     <span class="text-danger" style="font-size: 10px">Kosongkan jika tidak ingin mengubah.</span>
                                                 </div>
                                             </div>

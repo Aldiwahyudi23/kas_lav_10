@@ -49,6 +49,7 @@
 
                             <img src="{{ asset( $data->foto) }}" alt="Product Image" width="65px" height="65px" alt="Saya" class="brand-image img-circle elevation-3">
                         </a>
+
                     </div>
                     @endforeach
                 </div>

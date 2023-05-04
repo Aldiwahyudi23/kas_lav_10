@@ -106,14 +106,15 @@ class KeluargaController extends Controller
             }
         }
 
+        $namhub = Keluarga::find($request->nama_hubungan);
         if ($request->anak_ke) {
-            $no_induk = 50000 . $request->nama_hubungan . $request->anak_ke;
+            $no_induk = $namhub->nik . $request->anak_ke;
         } else {
             if ($request->hubungan == "Suami") {
-                $no_induk = 50000 .  $request->nama_hubungan . 0;
+                $no_induk =  $namhub->nik . -1;
             }
             if ($request->hubungan == "Istri") {
-                $no_induk = 50000 . $request->nama_hubungan . 00;
+                $no_induk = $namhub->nik . -2;
             }
         }
 
@@ -238,13 +239,13 @@ class KeluargaController extends Controller
         $namhub = Keluarga::find($request->nama_hubungan);
 
         if ($request->anak_ke) {
-            $no_induk = 50000 . $namhub->anak_ke . $request->anak_ke;
+            $no_induk = $namhub->nik . $request->anak_ke;
         } else {
             if ($request->hubungan == "Suami") {
-                $no_induk = 50000 .  $namhub->anak_ke . 0;
+                $no_induk =  $namhub->nik . -1;
             }
             if ($request->hubungan == "Istri") {
-                $no_induk = 50000 . $namhub->anak_ke . 00;
+                $no_induk = $namhub->nik . -2;
             }
         }
         $data = Keluarga::find($id);
@@ -261,23 +262,26 @@ class KeluargaController extends Controller
         $data->anak_ke      = $request->anak_ke;
         if ($request->foto) {
             $data->foto      = "/img/profile/$nama";
+
+
+            if ($data->user_id == true) {
+                $data_user = User::find($data->user_id);
+                $data_user->foto = "/img/profile/$nama";
+                $data_user->update();
+            } else {
+                $data_user = User::find(1);
+            }
+
+            $foto = new Foto;
+            $foto->keluarga_id = $data->id;
+            $foto->user_id = $data_user->id;
+            $foto->foto  = $data->foto;
+            $foto->save();
         } else {
         }
         $data->update();
 
-        if ($data->user_id == true) {
-            $data_user = User::find($data->user_id);
-            $data_user->foto = "/img/profile/$nama";
-            $data_user->update();
-        } else {
-            $data_user = User::find(1);
-        }
 
-        $foto = new Foto;
-        $foto->keluarga_id = $data->id;
-        $foto->user_id = $data_user->id;
-        $foto->foto  = $data->foto;
-        $foto->save();
 
         if (Auth::user()->role == 'Admin') {
             return redirect()->back()->with('infoes', 'Data Anggota Keluarga Parantos di edit');
