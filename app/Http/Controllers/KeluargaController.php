@@ -445,7 +445,12 @@ class KeluargaController extends Controller
         $data_keluarga = Keluarga::all();
         $data_keluarga_tugu = Keluarga::where('tugu', 'ya')->get();
 
-        return view('admin.master_data.data_keluarga.keturunan.index', compact('foto', 'data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'data_keluarga_tugu'));
+        $lahir    = new DateTime($data_anggota->tanggal_lahir);
+        $today        = new DateTime();
+        $umurr = $today->diff($lahir);
+
+
+        return view('admin.master_data.data_keluarga.keturunan.index', compact('umurr', 'foto', 'data_keluarga', 'data_anggota', 'data_keluarga_hubungan', 'data_keluarga_tugu'));
     }
     public function keturunan_detail(Request $request)
     {

@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
 <section class="content card col-12" style="padding: 10px 10px 10px 10px ">
     <div class="box">
         <h4><i class="nav-icon fas fa-users my-1 btn-sm-1"></i> Data Anggota Keluarga</h4>
@@ -42,7 +44,7 @@
                                         </a>
                                         <tr>
                                             <th style="width:50%">Nama</th>
-                                            <td>{{ $data_anggota->nama}}</td>
+                                            <td>{{ $data_anggota->nama}} ({{$umurr->y}})</td>
                                         </tr>
                                         <tr>
                                             <th style="width:50%">Jenis Kelamin</th>
@@ -130,11 +132,18 @@
                                     </button>
                                 </div>
                             </div>
+                            <?php
+                            $lahir    = new DateTime($data->tanggal_lahir);
+                            $today        = new DateTime();
+                            $umur = $today->diff($lahir);
+                            ?>
                             <div class="card-body pt-0" id="card">
                                 <div class="row">
                                     <div class="col-7">
                                         <a href="{{Route('keturunan_detail',Crypt::encrypt($data->id))}}" class="">
-                                            <h2 class="lead" id="nama"><b>{{$data->nama}}</b></h2>
+                                            <h2 class="lead" id="nama"><b>{{$data->nama}} </b>
+                                                ({{ $umur->y }})
+                                            </h2>
                                             <p class="text-muted text-sm"><b>Status: </b> {{$data->pekerjaan}} </p>
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                                 <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Alamat: {{$data->alamat}}</li>

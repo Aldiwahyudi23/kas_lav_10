@@ -87,7 +87,7 @@
                                         <div class="form-group">
                                             <label for="account-company">Foto Profile</label> <br>
                                             <img src="{{ asset($data_anggota->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
-                                            <input type="file" class="form-control" value="{{ $data_anggota->foto }}" name="foto" id="foto">
+                                            <input type="file" class="form-control" value="" name="foto" id="foto">
                                             <span class="text-danger" style="font-size: 10px">Kosongkan jika tidak ingin mengubah.</span>
                                         </div>
                                     </div>

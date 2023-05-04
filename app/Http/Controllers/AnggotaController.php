@@ -154,21 +154,23 @@ class AnggotaController extends Controller
         }
         if ($request->foto) {
             $data->foto = "/img/profile/$nama";
+
+            $data_user = Keluarga::find($request->anggota_kel_id);
+            $data_user->foto = $data->foto;
+            $data_user->update();
+
+            $foto = new Foto;
+            $foto->keluarga_id = $data_user->id;
+            $foto->user_id = $data->id;
+            $foto->foto  = $data->foto;
+            $foto->save();
         } else {
         }
         $data->update();
 
 
 
-        $data_user = Keluarga::find($request->anggota_kel_id);
-        $data_user->foto = $data->foto;
-        $data_user->update();
 
-        $foto = new Foto;
-        $foto->keluarga_id = $data_user->id;
-        $foto->user_id = $data->id;
-        $foto->foto  = $data->foto;
-        $foto->save();
 
         return redirect('anggota')->with('infoes', 'Data Anggota Keluarga Parantos di edit');
     }
